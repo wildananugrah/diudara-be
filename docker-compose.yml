@@ -1,0 +1,23 @@
+version: "3.1"
+
+services:
+  jwt:
+    build:
+      context: .
+      dockerfile: ./app.Dockerfile
+    container_name: jwt
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=${PORT}
+      - HOST=${HOST}
+    networks:
+      app-net: {}
+    volumes:
+      - ./keys:/app/keys
+
+networks:
+  app-net:
+    external: true
+    name: 'diudara-net'
