@@ -1,5 +1,5 @@
 import { createUser, loginUser, deleteUser } from "../handlers/users.handler.js"
-import { createUserSchema, loginUserSchema, deleteUserSchema } from "../schema/users.schema.js"
+import { createUserSchema, loginUserSchema, deleteUserSchema, updateUserSchema } from "../schema/users.schema.js"
 
 const routes = async (app, options) => {
   app.route({
@@ -21,6 +21,13 @@ const routes = async (app, options) => {
     url: '/users/:userId',
     schema: deleteUserSchema,
     handler: deleteUser
+  })
+
+  app.route({
+    method: 'PUT',
+    url: '/users/:userId',
+    schema: updateUserSchema,
+    handler: updateUser
   })
 };
 

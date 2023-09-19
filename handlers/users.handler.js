@@ -37,6 +37,29 @@ export async function loginUser(req, res) {
     }
 }
 
+export async function updateUser(req, res){
+    try {
+        
+        const { userId } = req.params
+        const { email, name } = req.body
+
+        await this.prisma.user.update({
+            where: { id: userId },
+            data : {
+                email, name
+            }
+        })
+
+        return {
+            message: "User has been updated",
+            data: req.body
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
+
 export async function deleteUser(req, res) {
     try {
         

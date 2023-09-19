@@ -97,8 +97,50 @@ const loginUserSchema = {
     }
 }
 
+const updateUserSchema = {
+    description: 'Update a new user',
+    summary: 'Update a new user',
+    tags: ['Users'],
+    body: {
+        type: "object",
+        properties: {
+            email: {
+                type: "string",
+            },
+            name: {
+                type: "string"
+            }
+        },
+        additionalProperties: false,
+        required: ['name', 'email']
+    },
+    response: {
+        200: {
+            description: 'Success Response',
+            type: 'object',
+            properties: {
+                message: {
+                    type: "string"
+                },
+                data: {
+                    type: "object",
+                    properties: {
+                        email: {
+                            type: "string",
+                        },
+                        name: {
+                            type: "string"
+                        }
+                    },
+                }
+            }
+        }
+    }
+}
+
 export {
     createUserSchema,
     deleteUserSchema,
     loginUserSchema,
+    updateUserSchema,
 }
