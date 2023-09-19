@@ -14,6 +14,8 @@ export default fp(async (app, options) => {
 
     app.decorate('getToken', async (data) => {
         try {
+            console.log(`${jwtEndpoint}/token`)
+            console.log(data)
             const response = await fetch(`${jwtEndpoint}/token`, {
                 headers: {
                     'Content-Type': 'application/json'
