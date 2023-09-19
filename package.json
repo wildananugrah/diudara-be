@@ -9,7 +9,7 @@
     "typescript": "^5.0.0"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "npx prisma migrate dev --name user_email_unique; nodemon index.js"
   },
   "dependencies": {
     "@fastify/autoload": "^5.7.1",
