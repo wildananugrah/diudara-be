@@ -36,3 +36,21 @@ export async function loginUser(req, res) {
         return res.code(400).send({ statusCode: 400, message: err.message });
     }
 }
+
+export async function deleteUser(req, res) {
+    try {
+        
+        const { userId } = req.params
+
+        await this.prisma.delete({
+            where: { id: userId }
+        })
+
+        return {
+            message: "User has been deleted."
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
