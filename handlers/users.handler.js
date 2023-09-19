@@ -42,7 +42,7 @@ export async function deleteUser(req, res) {
         
         const { userId } = req.params
 
-        await this.prisma.delete({
+        await this.prisma.user.delete({
             where: { id: userId }
         })
 
