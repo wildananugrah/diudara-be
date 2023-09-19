@@ -1,4 +1,4 @@
-import { createUser, loginUser } from "../handlers/users.handler";
+import { createUser, loginUser } from "../handlers/users.handler.js";
 
 const routes = async (app, options) => {
     app.route({
