@@ -8,7 +8,7 @@ services:
     container_name: diudara-be
     restart: always
     ports:
-      - 8030:3000
+      - 8020:3000
     environment:
       - APP_ENV
       - APP_PORT
