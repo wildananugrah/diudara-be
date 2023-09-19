@@ -1,13 +1,13 @@
 export async function createUser(req, res) {
     try {
 
-        await this.prisma.user.create({
+        const user = await this.prisma.user.create({
             data: req.body
         })
 
         return {
             message: "User has been created",
-            data: req.body
+            data: user
         }
 
     } catch (err) {
@@ -29,7 +29,8 @@ export async function loginUser(req, res) {
 
         return {
             message: "User has been found",
-            data: user
+            data: user,
+            ...await this.getToken(user)
         }
 
     } catch (err) {
@@ -37,15 +38,18 @@ export async function loginUser(req, res) {
     }
 }
 
-export async function updateUser(req, res){
+export async function updateUser(req, res) {
     try {
-        
-        const { userId } = req.params
+
         const { email, name } = req.body
 
+        const userToken = this.getUserToken(req.headers.authorization)
+
+        const { data } = await this.validateToken(userToken)
+
         await this.prisma.user.update({
-            where: { id: userId },
-            data : {
+            where: { id: data.id },
+            data: {
                 email, name
             }
         })
@@ -62,11 +66,13 @@ export async function updateUser(req, res){
 
 export async function deleteUser(req, res) {
     try {
-        
-        const { userId } = req.params
+
+        const userToken = this.getUserToken(req.headers.authorization)
+
+        const { data } = await this.validateToken(userToken)
 
         await this.prisma.user.delete({
-            where: { id: userId }
+            where: { id: data.id }
         })
 
         return {

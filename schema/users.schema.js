@@ -34,6 +34,9 @@ const createUserSchema = {
                         },
                         name: {
                             type: "string"
+                        },
+                        id: {
+                            type: "string"
                         }
                     },
                 }
@@ -91,6 +94,12 @@ const loginUserSchema = {
                             type: "string"
                         }
                     },
+                },
+                token: {
+                    type: "string"
+                },
+                expired: {
+                    type: "number"
                 }
             }
         }

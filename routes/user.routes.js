@@ -18,14 +18,14 @@ const routes = async (app, options) => {
 
   app.route({
     method: 'DELETE',
-    url: '/users/:userId',
+    url: '/users',
     schema: deleteUserSchema,
     handler: deleteUser
   })
 
   app.route({
     method: 'PUT',
-    url: '/users/:userId',
+    url: '/users',
     schema: updateUserSchema,
     handler: updateUser
   })
