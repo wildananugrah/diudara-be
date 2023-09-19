@@ -97,7 +97,7 @@ const loginUserSchema = {
     }
 }
 
-export default {
+export {
     createUserSchema,
     deleteUserSchema,
     loginUserSchema,
