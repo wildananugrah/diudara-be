@@ -1,4 +1,4 @@
-import { createUser, loginUser, deleteUser } from "../handlers/users.handler.js"
+import { createUser, loginUser, deleteUser, updateUser } from "../handlers/users.handler.js"
 import { createUserSchema, loginUserSchema, deleteUserSchema, updateUserSchema } from "../schema/users.schema.js"
 
 const routes = async (app, options) => {
