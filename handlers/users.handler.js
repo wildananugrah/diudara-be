@@ -27,6 +27,8 @@ export async function loginUser(req, res) {
             }
         })
 
+        if (!user) return res.status(404).send({ statusCode: 400, message: 'invalid email or password' })
+
         return {
             message: "User has been found",
             data: user,
