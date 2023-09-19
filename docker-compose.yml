@@ -1,17 +1,19 @@
 version: "3.1"
 
 services:
-  jwt:
+  diudara-be:
     build:
       context: .
       dockerfile: ./app.Dockerfile
-    container_name: jwt
+    container_name: diudara-be
     restart: always
     ports:
-      - 3000:3000
+      - 8030:3000
     environment:
-      - PORT=${PORT}
-      - HOST=${HOST}
+      - APP_ENV
+      - APP_PORT
+      - APP_HOST
+      - DATABASE_URL
     networks:
       app-net: {}
     volumes:

@@ -1,7 +1,9 @@
-FROM node:18-alpine
+FROM oven/bun
+# FROM node:18-alpine
 
 WORKDIR /app
 COPY ./ .
-RUN npm install
+RUN bun install
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+CMD ["bun", "--hot", "run" ,"index.js"]
+# CMD ["npm", "run" ,"dev"]
