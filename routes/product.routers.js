@@ -1,4 +1,4 @@
-import { createProduct, deleteProduct, getProductById, getProducts } from "../handlers/products.handler.js";
+import { createProduct, deleteProduct, getProductById, getProducts, updateProduct } from "../handlers/products.handler.js";
 import { createProductSchema } from "../schema/products.schema.js";
 
 const routes = async (app, options) => {
@@ -28,6 +28,13 @@ const routes = async (app, options) => {
         url: '/products/:id',
         // schema: createProductSchema,
         handler: deleteProduct
+    });
+
+    app.route({
+        method: 'PUT',
+        url: '/products/:id',
+        // schema: createProductSchema,
+        handler: updateProduct
     });
 }
 
