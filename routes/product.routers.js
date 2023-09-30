@@ -5,7 +5,7 @@ const routes = async (app, options) => {
     app.route({
         method: 'POST',
         url: '/products',
-        schema: createProductSchema,
+        // schema: createProductSchema,
         handler: createProduct
     });
 
