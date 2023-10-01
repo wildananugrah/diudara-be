@@ -1,5 +1,4 @@
 import { createProduct, deleteProduct, getProductById, getProducts, updateProduct } from "../handlers/products.handler.js";
-import { createProductSchema } from "../schema/products.schema.js";
 
 const routes = async (app, options) => {
     app.route({
