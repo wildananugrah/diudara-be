@@ -60,3 +60,30 @@ export async function deleteProductItem(req, res) {
         return res.code(400).send({ statusCode: 400, message: err.message });
     }
 }
+
+export async function updateStatusProductItem(req, res) {
+    try {
+
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+        const { productId, productItemId } = req.params
+        const { status } = req.body
+
+        await this.prisma.productItem.update({
+            where: {
+                userId: data.id,
+                productId: productId, 
+                id: productItemId
+            },
+            data: {
+                status: status
+            }
+        })
+
+        return {
+            message: "Product Item has been updated"
+        }
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}

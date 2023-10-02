@@ -1,4 +1,4 @@
-import { addProductItem, deleteProductItem, getProductItems } from "../handlers/productItems.handler.js";
+import { addProductItem, deleteProductItem, getProductItems, updateStatusProductItem } from "../handlers/productItems.handler.js";
 
 const routes = async (app, options) => {
     app.route({
@@ -20,6 +20,13 @@ const routes = async (app, options) => {
         url: '/product-items/:productId/:productItemId',
         // schema: createProductSchema,
         handler: deleteProductItem
+    });
+
+    app.route({
+        method: 'PUT',
+        url: '/product-items/:productId/:productItemId',
+        // schema: createProductSchema,
+        handler: updateStatusProductItem
     });
 }
 
