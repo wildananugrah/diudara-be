@@ -43,8 +43,6 @@ export async function loginUser(req, res) {
 export async function updateUser(req, res) {
     try {
 
-        const { email, name } = req.body
-
         const userToken = this.getUserToken(req.headers.authorization)
 
         const { data } = await this.validateToken(userToken)
@@ -52,7 +50,7 @@ export async function updateUser(req, res) {
         await this.prisma.user.update({
             where: { id: data.id },
             data: {
-                email, name
+                ...req.body
             }
         })
 

@@ -92,6 +92,9 @@ const loginUserSchema = {
                         },
                         name: {
                             type: "string"
+                        },
+                        username: {
+                            type: "string"
                         }
                     },
                 },
@@ -118,10 +121,13 @@ const updateUserSchema = {
             },
             name: {
                 type: "string"
+            },
+            username: {
+                type: "string"
             }
         },
         additionalProperties: false,
-        required: ['name', 'email']
+        required: ['name', 'email', 'username']
     },
     response: {
         200: {
@@ -138,6 +144,9 @@ const updateUserSchema = {
                             type: "string",
                         },
                         name: {
+                            type: "string"
+                        },
+                        username: {
                             type: "string"
                         }
                     },
