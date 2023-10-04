@@ -94,7 +94,7 @@ export async function getUserTemplate(req, res) {
         })
 
         const template = await this.prisma.template.findUnique({
-            where: { id: user.template.id }
+            where: { id: user.templateId }
         })
 
         return {
