@@ -1,4 +1,4 @@
-import { createUser, loginUser, deleteUser, updateUser, getUserProfile, updateTemplate } from "../handlers/users.handler.js"
+import { createUser, loginUser, deleteUser, updateUser, getUserProfile, updateTemplate, getUserTemplate } from "../handlers/users.handler.js"
 import { createUserSchema, loginUserSchema, deleteUserSchema, updateUserSchema } from "../schema/users.schema.js"
 
 const routes = async (app, options) => {
@@ -41,6 +41,12 @@ const routes = async (app, options) => {
     method: 'PUT',
     url: '/user-template',
     handler: updateTemplate
+  })
+
+  app.route({
+    method: 'GET',
+    url: '/:username/template',
+    handler: getUserTemplate
   })
   
 };

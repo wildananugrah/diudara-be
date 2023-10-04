@@ -84,7 +84,7 @@ export async function getUserProfile(req, res) {
     }
 }
 
-export async function getUserTheme(req, res) {
+export async function getUserTemplate(req, res) {
     try {
 
         const { username } = req.params
@@ -93,9 +93,13 @@ export async function getUserTheme(req, res) {
             where: { username: username }
         })
 
+        const template = await this.prisma.template.findUnique({
+            where: { id: user.template.id }
+        })
+
         return {
-            message: "User has been updated",
-            data: user
+            message: "User template has been retrieved",
+            data: template
         }
 
     } catch (err) {
