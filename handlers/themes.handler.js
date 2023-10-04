@@ -53,7 +53,9 @@ export async function removeTheme(req, res) {
     try {
 
         const theme = await this.prisma.theme.delete({
-            data: req.params.themeId
+            where: {
+                id: req.params.themeId
+            }
         })
 
         return {
