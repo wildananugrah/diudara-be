@@ -37,11 +37,19 @@ export async function getThemeDetail(req, res) {
 export async function getThemes(req, res) {
     try {
 
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+
         const themes = await this.prisma.theme.findMany()
+
+        const themesResponse = themes.map(async (theme) => {
+            const userTheme = await this.prisma.user.findUnique({ where: { themeId: theme.id, id: data.id } })
+            return { ...theme, active: userTheme === null ? 0 : 1 }
+        })
 
         return {
             message: "Theme has been retrieved",
-            data: themes
+            data: themesResponse
         }
 
     } catch (err) {
