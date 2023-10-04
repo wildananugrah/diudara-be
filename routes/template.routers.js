@@ -1,32 +1,32 @@
-import { addTheme, getThemeDetail, getThemes, removeTheme } from "../handlers/themes.handler.js";
+import { addTemplate, getTemplateDetail, getTemplates, removeTemplate } from "../handlers/templates.handler.js";
 
 const routes = async (app, options) => {
     app.route({
         method: 'POST',
-        url: '/themes',
+        url: '/templates',
         // schema: createProductSchema,
-        handler: addTheme
+        handler: addTemplate
     });
 
     app.route({
         method: 'GET',
-        url: '/themes',
+        url: '/templates',
         // schema: createProductSchema,
-        handler: getThemes
+        handler: getTemplates
     });
 
     app.route({
         method: 'GET',
-        url: '/themes/:themeId',
+        url: '/templates/:templateId',
         // schema: createProductSchema,
-        handler: getThemeDetail
+        handler: getTemplateDetail
     });
 
     app.route({
         method: 'DELETE',
-        url: '/themes/:themeId',
+        url: '/templates/:templateId',
         // schema: createProductSchema,
-        handler: removeTheme
+        handler: removeTemplate
     });
 }
 

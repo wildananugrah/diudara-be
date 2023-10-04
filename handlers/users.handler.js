@@ -123,7 +123,7 @@ export async function deleteUser(req, res) {
     }
 }
 
-export async function updateTheme(req, res) {
+export async function updateTemplate(req, res) {
     try {
 
         const userToken = this.getUserToken(req.headers.authorization)
@@ -132,12 +132,12 @@ export async function updateTheme(req, res) {
         await this.prisma.user.update({
             where: { id: data.id },
             data: {
-                themeId: req.body.themeId
+                templateId: req.body.templateId
             }
         })
 
         return {
-            message: "User theme has been updated."
+            message: "User template has been updated."
         }
 
     } catch (err) {

@@ -1,13 +1,13 @@
-export async function addTheme(req, res) {
+export async function addTemplate(req, res) {
     try {
 
-        const theme = await this.prisma.theme.create({
+        const template = await this.prisma.template.create({
             data: req.body
         })
 
         return {
-            message: "Theme has been added",
-            data: theme
+            message: "template has been added",
+            data: template
         }
 
     } catch (err) {
@@ -15,18 +15,18 @@ export async function addTheme(req, res) {
     }
 }
 
-export async function getThemeDetail(req, res) {
+export async function getTemplateDetail(req, res) {
     try {
 
-        const theme = await this.prisma.theme.findUnique({
+        const template = await this.prisma.template.findUnique({
             where: {
-                id: req.params.themeId
+                id: req.params.templateId
             }
         })
 
         return {
-            message: "Theme has been retrieved",
-            data: theme
+            message: "Template has been retrieved",
+            data: template
         }
 
     } catch (err) {
@@ -34,25 +34,25 @@ export async function getThemeDetail(req, res) {
     }
 }
 
-export async function getThemes(req, res) {
+export async function getTemplates(req, res) {
     try {
 
         const userToken = this.getUserToken(req.headers.authorization)
         const { data } = await this.validateToken(userToken)
 
-        const themes = await this.prisma.theme.findMany()
+        const templates = await this.prisma.template.findMany()
         const user = await this.prisma.user.findUnique({ where: { id: data.id } })
 
-        let themesResponse = []
+        let templatesResponse = []
 
         // TODO: I believe it can be improved as well. 
-        for(let i = 0; i < themes.length; i++) {
-            themesResponse.push({ ...themes[i], active: themes[i].id === user.themeId ? 1 : 0 })
+        for(let i = 0; i < templates.length; i++) {
+            templatesResponse.push({ ...templates[i], active: templates[i].id === user.templateId ? 1 : 0 })
         }
 
         return {
-            message: "Theme has been retrieved",
-            data: themesResponse
+            message: "Template has been retrieved",
+            data: templatesResponse
         }
 
     } catch (err) {
@@ -60,17 +60,17 @@ export async function getThemes(req, res) {
     }
 }
 
-export async function removeTheme(req, res) {
+export async function removeTemplate(req, res) {
     try {
 
-        await this.prisma.theme.delete({
+        await this.prisma.template.delete({
             where: {
-                id: req.params.themeId
+                id: req.params.templateId
             }
         })
 
         return {
-            message: "Theme has been deleted"
+            message: "Template has been deleted"
         }
 
     } catch (err) {
