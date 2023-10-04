@@ -25,7 +25,7 @@ export async function getThemeDetail(req, res) {
         })
 
         return {
-            message: "Theme has been deleted",
+            message: "Theme has been retrieved",
             data: theme
         }
 
@@ -40,7 +40,7 @@ export async function getThemes(req, res) {
         const themes = await this.prisma.theme.findMany()
 
         return {
-            message: "Theme has been deleted",
+            message: "Theme has been retrieved",
             data: themes
         }
 
