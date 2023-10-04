@@ -41,18 +41,14 @@ export async function getThemes(req, res) {
         const { data } = await this.validateToken(userToken)
 
         const themes = await this.prisma.theme.findMany()
+        const user = await this.prisma.user.findUnique({ where: { id: data.id } })
 
-        const userThemes = await this.prisma.user.findUnique({
-            where: { id: data.id },
-            select: { themeId: true }
-        });
+        let themesResponse = []
 
-        const activeThemeIds = userThemes.map(user => user.themeId);
-
-        const themesResponse = themes.map(theme => ({
-            ...theme,
-            active: activeThemeIds.includes(theme.id) ? 1 : 0
-        }));
+        // TODO: I believe it can be improved as well. 
+        for(let i = 0; i < themes.length; i++) {
+            themesResponse.push({ ...themes[i], active: themes[i].id === user.themeId ? 1 : 0 })
+        }
 
         return {
             message: "Theme has been retrieved",
