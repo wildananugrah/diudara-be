@@ -52,15 +52,14 @@ export async function getThemes(req, res) {
 export async function removeTheme(req, res) {
     try {
 
-        const theme = await this.prisma.theme.delete({
+        await this.prisma.theme.delete({
             where: {
                 id: req.params.themeId
             }
         })
 
         return {
-            message: "Theme has been deleted",
-            data: theme
+            message: "Theme has been deleted"
         }
 
     } catch (err) {
