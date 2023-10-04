@@ -42,10 +42,17 @@ export async function getThemes(req, res) {
 
         const themes = await this.prisma.theme.findMany()
 
-        const themesResponse = themes.map(async (theme) => {
-            const userTheme = await this.prisma.user.findUnique({ where: { themeId: theme.id, id: data.id } })
-            return { ...theme, active: userTheme === null ? 0 : 1 }
-        })
+        let themesResponse = []
+
+        for(let i = 0; i < themes.length; i++) {
+            const userTheme = await this.prisma.user.findUnique({ where: { themeId: themes[i].id, id: data.id } })
+            themesResponse.push({ ...themes[i], active: userTheme === null ? 0 : 1 })
+        }
+
+        // themes.map(async (theme) => {
+        //     const userTheme = await this.prisma.user.findUnique({ where: { themeId: theme.id, id: data.id } })
+        //     themesResponse.push({ ...theme, active: userTheme === null ? 0 : 1 })
+        // })
 
         return {
             message: "Theme has been retrieved",
