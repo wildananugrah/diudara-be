@@ -122,3 +122,25 @@ export async function deleteUser(req, res) {
         return res.code(400).send({ statusCode: 400, message: err.message });
     }
 }
+
+export async function updateTheme(req, res) {
+    try {
+
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+
+        await this.prisma.user.update({
+            where: { id: data.id },
+            data: {
+                themeId: req.body.themeId
+            }
+        })
+
+        return {
+            message: "User theme has been updated."
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
