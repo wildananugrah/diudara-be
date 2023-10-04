@@ -84,6 +84,25 @@ export async function getUserProfile(req, res) {
     }
 }
 
+export async function getUserTheme(req, res) {
+    try {
+
+        const { username } = req.params
+
+        const user = await this.prisma.user.findUnique({
+            where: { username: username }
+        })
+
+        return {
+            message: "User has been updated",
+            data: user
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
+
 export async function deleteUser(req, res) {
     try {
 
