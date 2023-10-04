@@ -64,6 +64,26 @@ export async function updateUser(req, res) {
     }
 }
 
+export async function getUserProfile(req, res) {
+    try {
+
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+
+        const user = await this.prisma.user.findUnique({
+            where: { id: data.id }
+        })
+
+        return {
+            message: "User has been updated",
+            data: user
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
+
 export async function deleteUser(req, res) {
     try {
 
