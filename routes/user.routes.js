@@ -39,7 +39,7 @@ const routes = async (app, options) => {
 
   app.route({
     method: 'PUT',
-    url: '/user-theme',
+    url: '/user-template',
     handler: updateTemplate
   })
   
