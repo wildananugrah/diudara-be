@@ -1,4 +1,4 @@
-import { addTheme, getThemeDetail, getThemes, removeTheme } from "../handlers/themes.handler";
+import { addTheme, getThemeDetail, getThemes, removeTheme } from "../handlers/themes.handler.js";
 
 const routes = async (app, options) => {
     app.route({
