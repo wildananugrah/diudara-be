@@ -25,7 +25,7 @@ const routes = async (app, options) => {
 
   app.route({
     method: 'PUT',
-    url: '/users',
+    url: '/user-profile',
     schema: updateUserSchema,
     handler: updateUser
   })
