@@ -12,7 +12,10 @@ export async function getProducts(req, res) {
         return {
             message: "Get all products",
             data: await this.prisma.product.findMany({
-                where: { userId: user.id }
+                where: { userId: user.id },
+                include: {
+                    productItems: true
+                }
             })
         }
     } catch (err) {
