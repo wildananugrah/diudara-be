@@ -168,8 +168,7 @@ export async function registerWithGmail(req, res) {
 
         return {
             message: "User has been created",
-            data: user,
-            ...await this.getToken(user)
+            data: user
         }
 
     } catch (err) {
@@ -201,7 +200,8 @@ export async function loginWithGmail(req, res) {
 
         return {
             message: "User has been founded",
-            data: user
+            data: user,
+            ...await this.getToken(user)
         }
 
     } catch (err) {
