@@ -15,6 +15,8 @@ model User {
   username    String?       @unique @db.VarChar(255)
   template    Template?     @relation(fields: [templateId], references: [id])
   templateId  String?       @db.VarChar(255)
+  googleToken String?       @db.VarChar(255)
+  googleId    String?       @db.VarChar(255)
   createdAt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   products    Product[]

@@ -148,3 +148,62 @@ export async function updateTemplate(req, res) {
         return res.code(400).send({ statusCode: 400, message: err.message });
     }
 }
+
+export async function registerWithGmail(req, res) {
+    try {
+
+        const response = await fetch(`${process.env.GOOGLE_API}/oauth2/v1/userinfo?alt=json`, {
+            headers: {
+                "Authorization": `Bearer ${req.headers.authorization.split(' ')[1]}`
+            }
+        })
+
+        const responseJson = await response.json()
+
+        const { email, name, id } = responseJson
+
+        const user = await this.prisma.user.create({
+            data: { email: email, name: name, googleId: id, password: "" }
+        })
+
+        return {
+            message: "User has been created",
+            data: user
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
+
+export async function loginWithGmail(req, res) {
+    try {
+
+        const response = await fetch(`${process.env.GOOGLE_API}/oauth2/v1/userinfo?alt=json`, {
+            headers: {
+                "Authorization": `Bearer ${req.headers.authorization.split(' ')[1]}`
+            }
+        })
+
+        const responseJson = await response.json()
+
+        const { email } = responseJson
+
+        const user = await this.prisma.user.findUnique({
+            where: { email: email }
+        })
+
+        if(user === null) return {
+            message: "User has not been founded",
+            data: user
+        }
+
+        return {
+            message: "User has been founded",
+            data: user
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}

@@ -1,4 +1,4 @@
-import { createUser, loginUser, deleteUser, updateUser, getUserProfile, updateTemplate, getUserTemplate } from "../handlers/users.handler.js"
+import { createUser, loginUser, deleteUser, updateUser, getUserProfile, updateTemplate, getUserTemplate, loginWithGmail, registerWithGmail } from "../handlers/users.handler.js"
 import { createUserSchema, loginUserSchema, deleteUserSchema, updateUserSchema } from "../schema/users.schema.js"
 
 const routes = async (app, options) => {
@@ -48,6 +48,20 @@ const routes = async (app, options) => {
     url: '/:username/template',
     handler: getUserTemplate
   })
+
+  app.route({
+    method: 'GET',
+    url: '/users/auth/gmail',
+    // schema: loginUserSchema,
+    handler: loginWithGmail
+  });
+
+  app.route({
+    method: 'POST',
+    url: '/users/gmail',
+    // schema: createUserSchema,
+    handler: registerWithGmail
+  });
   
 };
 
