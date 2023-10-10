@@ -85,7 +85,10 @@ export async function updateProduct(req, res) {
                 userId: data.id
             },
             data: {
-                name, description, status
+                name,
+                description,
+                status,
+                image
             }
         })
 
