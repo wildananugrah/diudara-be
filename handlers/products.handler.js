@@ -77,7 +77,7 @@ export async function updateProduct(req, res) {
         const userToken = this.getUserToken(req.headers.authorization)
         const { data } = await this.validateToken(userToken)
 
-        const { name, description } = req.body
+        const { name, description, status } = req.body
 
         await this.prisma.product.update({
             where: {
@@ -85,7 +85,7 @@ export async function updateProduct(req, res) {
                 userId: data.id
             },
             data: {
-                name, description
+                name, description, status
             }
         })
 
