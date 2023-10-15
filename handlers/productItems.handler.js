@@ -38,6 +38,25 @@ export async function getProductItems(req, res) {
     }
 }
 
+export async function getMyProductItems(req, res) {
+    try {
+
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+
+        const productItems = await this.prisma.productItem.findMany({
+            where: { userId: data.id }
+        })
+
+        return {
+            message: "Get All Product Items",
+            data: productItems
+        }
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
+
 export async function deleteProductItem(req, res) {
     try {
 
