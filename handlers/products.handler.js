@@ -111,10 +111,12 @@ export async function getProductToken(req, res) {
             where: { productId: productId, userId: data.id }
         })
 
+        console.log(productItems)
+
         const response = await fetch(`${process.env.JWT_ENDPOINT}/token`, {
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
-            body: JSON.stringify({ id: data.id, files: productItems.data.map(item => item.path) })
+            body: JSON.stringify({ id: data.id, files: productItems.map(item => item.path) })
         })
 
         const responseJson = await response.json()
