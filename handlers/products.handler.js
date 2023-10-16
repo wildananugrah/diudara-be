@@ -124,7 +124,7 @@ export async function getProductToken(req, res) {
         return {
             message: "Get All Product Items",
             token: responseJson.token,
-            url: `${process.env.STORAGE_ENDPOINT}?token=${responseJson.token}`
+            url: `${process.env.STORAGE_ENDPOINT}/file/download?token=${responseJson.token}`
         }
     } catch (err) {
         return res.code(400).send({ statusCode: 400, message: err.message });
