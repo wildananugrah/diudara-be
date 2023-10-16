@@ -193,7 +193,7 @@ export async function loginWithGmail(req, res) {
             where: { email: email }
         })
 
-        if(user === null) return {
+        if (user === null) return {
             message: "User has not been founded",
             data: user
         }
@@ -202,6 +202,25 @@ export async function loginWithGmail(req, res) {
             message: "User has been founded",
             data: user,
             ...await this.getToken(user)
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
+
+export async function getUserByUsername(req, res) {
+    try {
+
+        const { username } = req.params
+
+        const user = await this.prisma.user.findUnique({
+            where: { username: username }
+        })
+
+        return {
+            message: "User has been founded",
+            data: user,
         }
 
     } catch (err) {

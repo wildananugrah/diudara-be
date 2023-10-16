@@ -1,4 +1,4 @@
-import { createUser, loginUser, deleteUser, updateUser, getUserProfile, updateTemplate, getUserTemplate, loginWithGmail, registerWithGmail } from "../handlers/users.handler.js"
+import { createUser, loginUser, deleteUser, updateUser, getUserProfile, updateTemplate, getUserTemplate, loginWithGmail, registerWithGmail, getUserByUsername } from "../handlers/users.handler.js"
 import { createUserSchema, loginUserSchema, deleteUserSchema, updateUserSchema } from "../schema/users.schema.js"
 
 const routes = async (app, options) => {
@@ -38,6 +38,12 @@ const routes = async (app, options) => {
   })
 
   app.route({
+    method: 'GET',
+    url: '/user-profile/:username',
+    handler: getUserByUsername
+  })
+
+  app.route({
     method: 'PUT',
     url: '/user-template',
     handler: updateTemplate
@@ -62,7 +68,7 @@ const routes = async (app, options) => {
     // schema: createUserSchema,
     handler: registerWithGmail
   });
-  
+
 };
 
 export default routes;
