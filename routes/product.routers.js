@@ -37,7 +37,7 @@ const routes = async (app, options) => {
     });
 
     app.route({
-        method: 'POST',
+        method: 'GET',
         url: '/products/token/:productId',
         handler: getProductToken
     })
