@@ -100,3 +100,31 @@ export async function updateProduct(req, res) {
         return res.code(400).send({ statusCode: 400, message: err.message });
     }
 }
+
+export async function getProductToken(req, res) {
+    try {
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+        const { productId } = req.params
+
+        const productItems = await this.prisma.productItem.findMany({
+            where: { productId: productId, userId: data.id }
+        })
+
+        const response = await fetch(`${process.env.JWT_ENDPOINT}/token`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify({ id: data.id, files: productItems.data.map(item => item.path) })
+        })
+
+        const responseJson = await response.json()
+
+        return {
+            message: "Get All Product Items",
+            token: responseJson.token,
+            url: `${process.env.STORAGE_ENDPOINT}?token=${responseJson.token}`
+        }
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}

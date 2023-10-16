@@ -1,4 +1,4 @@
-import { createProduct, deleteProduct, getProductById, getProducts, updateProduct } from "../handlers/products.handler.js";
+import { createProduct, deleteProduct, getProductById, getProductToken, getProducts, updateProduct } from "../handlers/products.handler.js";
 
 const routes = async (app, options) => {
     app.route({
@@ -35,6 +35,12 @@ const routes = async (app, options) => {
         // schema: createProductSchema,
         handler: updateProduct
     });
+
+    app.route({
+        method: 'POST',
+        url: '/products/token/:productId',
+        handler: getProductToken
+    })
 }
 
 export default routes;
