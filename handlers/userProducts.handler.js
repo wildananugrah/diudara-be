@@ -111,15 +111,13 @@ export async function deleteUserCollectProduct(req, res) {
         const userToken = this.getUserToken(req.headers.authorization)
         const { data } = await this.validateToken(userToken)
 
-        const { productId } = req.params
+        const { id } = req.params
 
-        var userProduct = await this.prisma.userProductCollection.findMany({
-            where: {
-                productId: productId, userId: data.id
-            }
+        var userProduct = await this.prisma.userProductCollection.findUnique({
+            where: { id: id }
         })
 
-        if (userProduct.length !== 1) {
+        if (userProduct === null) {
             return res.code(400).send({
                 message: "Invalid product id",
                 data: userProduct
@@ -127,7 +125,7 @@ export async function deleteUserCollectProduct(req, res) {
         }
         else {
             await this.prisma.userProductCollection.delete({
-                where: { productId: productId, userId: data.id }
+                where: { id: id }
             })
 
             return {
