@@ -1,4 +1,4 @@
-import { deleteUserCollectProduct, getProductById, getProducts, getUserCollectProduct, postUserCollectProduct } from "../handlers/userProducts.handler.js";
+import { deleteUserCollectProduct, getProductById, getProducts, getUserCollectProduct, getUserCollectProductDetail, postUserCollectProduct } from "../handlers/userProducts.handler.js";
 
 const routes = async (app, options) => {
 
@@ -32,6 +32,12 @@ const routes = async (app, options) => {
         method: 'DELETE',
         url: '/userProducts/:id',
         handler: deleteUserCollectProduct
+    })
+
+    app.route({
+        method: 'GET',
+        url: '/userProducts/:id',
+        handler: getUserCollectProductDetail
     })
 }
 

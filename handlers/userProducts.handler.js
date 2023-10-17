@@ -138,3 +138,26 @@ export async function deleteUserCollectProduct(req, res) {
         return res.code(400).send({ statusCode: 400, message: err.message });
     }
 }
+
+export async function getUserCollectProductDetail(req, res) {
+    try {
+
+        const { id } = req.params
+
+        var userProduct = await this.prisma.userProductCollection.findUnique({
+            where: { id: id }
+        })
+
+        var productItems = await this.prisma.productItem.findMany({
+            where: { productId: userProduct.productId }
+        })
+
+        return {
+            message: "The product items has been retrieved.",
+            data: productItems
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
