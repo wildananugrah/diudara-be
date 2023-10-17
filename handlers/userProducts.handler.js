@@ -119,7 +119,7 @@ export async function deleteUserCollectProduct(req, res) {
             }
         })
 
-        if (userProduct.length !== 0) {
+        if (userProduct.length !== 1) {
             return res.code(400).send({
                 message: "Invalid product id",
                 data: userProduct
