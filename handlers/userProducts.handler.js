@@ -60,10 +60,10 @@ export async function postUserCollectProduct(req, res) {
         })
 
         if (userProduct.length !== 0) {
-            return {
+            return res.code(400).send({
                 message: "You've already had this product",
                 data: userProduct
-            }
+            })
         }
         else {
             userProduct = await this.prisma.userProductCollection.create({
