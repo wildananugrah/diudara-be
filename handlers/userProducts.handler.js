@@ -105,3 +105,38 @@ export async function postUserCollectProduct(req, res) {
         return res.code(400).send({ statusCode: 400, message: err.message });
     }
 }
+
+export async function deleteUserCollectProduct(req, res) {
+    try {
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+
+        const { productId } = req.body
+
+        var userProduct = await this.prisma.userProductCollection.findMany({
+            where: {
+                productId: productId, userId: data.id
+            }
+        })
+
+        if (userProduct.length !== 0) {
+            return res.code(400).send({
+                message: "Invalid product id",
+                data: userProduct
+            })
+        }
+        else {
+            await this.prisma.userProductCollection.delete({
+                where: { productId: productId, userId: data.id }
+            })
+
+            return {
+                message: "The product has been deleted.",
+                data: userProduct
+            }
+        }
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
