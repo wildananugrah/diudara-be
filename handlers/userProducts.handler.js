@@ -46,6 +46,29 @@ export async function getProductById(req, res) {
     }
 }
 
+export async function getUserCollectProduct(req, res) {
+    try {
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+
+        var userProducts = await this.prisma.userProductCollection.findMany({
+            where: {
+                userId: data.id
+            },
+            product: true
+        })
+
+        return {
+            message: "The product has been retrieved.",
+            data: userProducts
+        }
+
+
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}
+
 export async function postUserCollectProduct(req, res) {
     try {
         const userToken = this.getUserToken(req.headers.authorization)

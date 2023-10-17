@@ -1,4 +1,4 @@
-import { getProductById, getProducts, postUserCollectProduct } from "../handlers/userProducts.handler.js";
+import { getProductById, getProducts, getUserCollectProduct, postUserCollectProduct } from "../handlers/userProducts.handler.js";
 
 const routes = async (app, options) => {
 
@@ -20,6 +20,12 @@ const routes = async (app, options) => {
         method: 'POST',
         url: '/userProducts',
         handler: postUserCollectProduct
+    })
+
+    app.route({
+        method: 'GET',
+        url: '/userProducts',
+        handler: getUserCollectProduct
     })
 }
 
