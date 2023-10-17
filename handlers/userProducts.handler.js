@@ -45,3 +45,22 @@ export async function getProductById(req, res) {
         return res.code(400).send({ statusCode: 400, message: err.message });
     }
 }
+
+export async function postUserCollectProduct(req, res) {
+    try {
+        const userToken = this.getUserToken(req.headers.authorization)
+        const { data } = await this.validateToken(userToken)
+
+        const { productId } = req.body
+
+        this.prisma.userProductCollection.create({
+            data: { productId: productId, userId: data.id}
+        })
+
+        return {
+            message: "The product has been collected."
+        }
+    } catch (err) {
+        return res.code(400).send({ statusCode: 400, message: err.message });
+    }
+}

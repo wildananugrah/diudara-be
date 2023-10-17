@@ -1,4 +1,4 @@
-import { getProductById, getProducts } from "../handlers/userProducts.handler.js";
+import { getProductById, getProducts, postUserCollectProduct } from "../handlers/userProducts.handler.js";
 
 const routes = async (app, options) => {
 
@@ -15,6 +15,12 @@ const routes = async (app, options) => {
         // schema: createProductSchema,
         handler: getProductById
     });
+
+    app.route({
+        method: 'POST',
+        url: '/userProducts',
+        handler: postUserCollectProduct
+    })
 }
 
 export default routes;
