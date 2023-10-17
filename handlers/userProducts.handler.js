@@ -53,12 +53,15 @@ export async function postUserCollectProduct(req, res) {
 
         const { productId } = req.body
 
-        this.prisma.userProductCollection.create({
+        console.log({ productId: productId, userId: data.id})
+
+        const userProduct = await this.prisma.userProductCollection.create({
             data: { productId: productId, userId: data.id}
         })
 
         return {
-            message: "The product has been collected."
+            message: "The product has been collected.",
+            data: userProduct
         }
     } catch (err) {
         return res.code(400).send({ statusCode: 400, message: err.message });
