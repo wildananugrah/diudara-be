@@ -55,7 +55,9 @@ export async function getUserCollectProduct(req, res) {
             where: {
                 userId: data.id
             },
-            product: true
+            include: {
+                product: true
+            }
         })
 
         return {
