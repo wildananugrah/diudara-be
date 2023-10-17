@@ -30,7 +30,7 @@ const routes = async (app, options) => {
 
     app.route({
         method: 'DELETE',
-        url: '/userProducts',
+        url: '/userProducts/:productId',
         handler: deleteUserCollectProduct
     })
 }

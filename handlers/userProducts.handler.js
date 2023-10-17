@@ -111,7 +111,7 @@ export async function deleteUserCollectProduct(req, res) {
         const userToken = this.getUserToken(req.headers.authorization)
         const { data } = await this.validateToken(userToken)
 
-        const { productId } = req.body
+        const { productId } = req.params
 
         var userProduct = await this.prisma.userProductCollection.findMany({
             where: {
