@@ -36,7 +36,7 @@ const routes = async (app, options) => {
 
     app.route({
         method: 'GET',
-        url: '/userProducts/:id',
+        url: '/userProducts/detail/:id',
         handler: getUserCollectProductDetail
     })
 }
