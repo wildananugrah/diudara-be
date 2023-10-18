@@ -35,15 +35,15 @@ export async function getProducts(req, res) {
 
 export async function getProductById(req, res) {
     try {
-        const userToken = this.getUserToken(req.headers.authorization)
-        const { data } = await this.validateToken(userToken)
+        // const userToken = this.getUserToken(req.headers.authorization)
+        // const { data } = await this.validateToken(userToken)
 
         return {
             message: "Get ProductById",
             data: await this.prisma.product.findUnique({
                 where: {
                     id: req.params.id,
-                    userId: data.id
+                    // userId: data.id
                 }
             })
         }
